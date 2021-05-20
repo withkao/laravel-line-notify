@@ -1,0 +1,37 @@
+{
+    "name": "withkao/laravel-line-notify",
+    "description": "Line notify api for Laravel",
+    "type": "library",
+    "require": {
+        "php": "^7.3|^8.0",
+        "guzzlehttp/guzzle": "^7.3",
+        "illuminate/support": "^7.0|^8.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "kaozaza2",
+            "email": "kittisakphiri@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "WithKao\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "WithKao\\Providers\\LineNotifyServiceProvider"
+            ],
+            "aliases": {
+                "Line": "WithKao\\Facades\\Notify\\Line"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
