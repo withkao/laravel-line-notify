@@ -78,6 +78,18 @@ class LineNotify
         return implode(PHP_EOL, $this->messages);
     }
 
+    private function reset()
+    {
+        $this->token = config('line-notify.access_token');
+        $this->messages = [];
+        $this->thumbnailUrl = null;
+        $this->imageUrl = null;
+        $this->imagePath = null;
+        $this->notifyDisabled = false;
+        $this->stickerPackageId = null;
+        $this->stickerId = null;
+    }
+
     public function send($message = null): bool
     {
         if ($this->token === null) {
@@ -115,6 +127,7 @@ class LineNotify
         }
 
         $response = $client->post(static::URL, $params);
+        $this->reset();
         return $response->successful()
             && $response->json()['status'] === 200;
     }
