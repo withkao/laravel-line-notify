@@ -112,7 +112,7 @@ class LineNotify
             $params['stickerId'] = $this->stickerId;
         }
 
-        $response = $client()->post(static::URL, $params);
+        $response = $client->post(static::URL, $params);
         return $response->successful()
             && $response->json()['status'] === 200;
     }
