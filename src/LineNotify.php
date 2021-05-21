@@ -78,13 +78,17 @@ class LineNotify
         return implode(PHP_EOL, $this->messages);
     }
 
-    public function send(): bool
+    public function send($message = null): bool
     {
         if ($this->token === null) {
             throw new LineNotifyException(
                 'Token not specified!',
                 'Please specify access token in config/line-notify.php or set LINE_ACCESS_TOKEN in .env or use setToken function'
             );
+        }
+
+        if ($message !== null) {
+            $this->addMessage($message);
         }
 
         $client = Http::withToken($this->token);
@@ -111,11 +115,5 @@ class LineNotify
         $response = $client()->post(static::URL, $params);
         return $response->successful()
             && $response->json()['status'] === 200;
-    }
-
-    public function send($message): bool
-    {
-        $this->addMessage($message);
-        return $this->send();
     }
 }
