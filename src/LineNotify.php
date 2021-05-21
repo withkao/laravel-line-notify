@@ -95,6 +95,8 @@ class LineNotify
 
         if ($this->imagePath !== null) {
             $client = $client->attach('imageFile', fopen($this->imagePath, 'r'));
+        } else {
+            $client = $client->asForm();
         }
 
         $params = [
